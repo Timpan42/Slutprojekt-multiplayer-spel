@@ -46,3 +46,98 @@ Hade problem med att starta projektet, men annars gå det framåt.
 
 ### Har gjort 
 Har gjort klart del 1 och har börjat med del 2 med att ladda in assets.
+
+# veka 17
+## Tisdag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+## Fredag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+# veka 18
+## Tisdag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+## Fredag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+# veka 19
+## Tisdag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+## Fredag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+# veka 20
+## Tisdag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+## Fredag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+# veka 21
+## Tisdag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
+## Fredag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
