@@ -20,4 +20,23 @@ Planering kommer garanterat att ändras beroende på hur länge tutorial kommer 
 | 20    	| Fixa problem                          	                    | Hosta                    	|
 | 21    	| Lite roligt                           	                    | Martini                  	|
 
-## t
+# veka 16
+## Tisdag
+### Vad gjordes sist
+Börjat projekt had inget att skriva.
+
+### Vad ska göras 
+Ska skriva en planering till projektet.
+
+### Vad gick fel
+Tog längre tid att skriva planering än jag ville. 
+
+## Fredag
+### Vad gjordes sist
+Jag skrev planering som tog för lång tid.
+
+### Vad ska göras 
+Ska börja med att installera allt från tutorial och sen börja arbeta med den.  
+
+### Vad gick fel
+
