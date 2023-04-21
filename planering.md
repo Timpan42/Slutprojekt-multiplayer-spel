@@ -42,4 +42,7 @@ Jag skrev planering som tog för lång tid.
 Ska börja med att installera allt från tutorial och sen börja arbeta med den.  
 
 ### Vad gick fel
+Hade problem med att starta projektet, men annars gå det framåt.
 
+### Har gjort 
+Har gjort klart del 1 och har börjat med del 2 med att ladda in assets.
