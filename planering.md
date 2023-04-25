@@ -50,8 +50,10 @@ Har gjort klart del 1 och har börjat med del 2 med att ladda in assets.
 # veka 17
 ## Tisdag
 ### Vad gjordes sist
+Gjorde en grund ide till spelet (kan ändras!) och gjorde klar del 1, samt laddat ner assets genom tutorialn.   
 
 ### Vad ska göras 
+Ska börja med del 2 och bli klar med den. 
 
 ### Vad gick fel
 
