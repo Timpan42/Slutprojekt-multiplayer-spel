@@ -25,7 +25,13 @@ io.on('connection', function (socket) {
     // remove this player from our players object
     delete players[socket.id];
     // emit a message to all players to remove this player
+    
+    /*
+    Orsakar ett throw new error!!!
+    Varje gång man koppla ifrån från sidan  
     io.emit('disconnect', socket.id);
+  */
+     
   });
 });
 
