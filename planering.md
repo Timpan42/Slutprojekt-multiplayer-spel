@@ -56,8 +56,13 @@ Gjorde en grund ide till spelet (kan ändras!) och gjorde klar del 1, samt ladda
 Ska börja med del 2 och bli klar med den. 
 
 ### Vad gick fel
+Behövde fel söka mycket för att hitta problem som att servern fick ett error med dellande som jag inte förstå vad det är. Men kommenterade ut den dellen för nu.
+
+Hade också problem med att få koden från tutorialn att funka, en var mitt fel för jag skrev fel på en bit kod.
+Den andra var när jag skulle skapa den rörande funktionen. Tutorialn använde sig av wrap som är en function som var implementerad i phaser på version 3.3.0. Det blir ett problem när dem som gjorde tutorial sate versionen till 3.0.0 som inte har wrap. Så det var roligt att fel söka. 
 
 ### Har gjort 
+Har gjort stora delar av del 2 tutorial men är inte klar, ska fortsätta på den nästa lektion från punkt "Handling other player movements" 
 
 ## Fredag
 ### Vad gjordes sist
