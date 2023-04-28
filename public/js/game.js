@@ -22,6 +22,7 @@ function preload() {
 
   this.load.image('ship', 'assets/playerShip1_red.png');
   this.load.image('otherPlayer', 'assets/playerShip3_blue.png');
+  this.load.image('star', 'assets/star_gold.png');
 
 }
 
@@ -54,6 +55,7 @@ this.socket.on('disconnect', function (playerId){
 
 this.cursors = this.input.keyboard.createCursorKeys();
 
+// movement 
 this.socket.on('playerMoved', function (playerInfo){
   self.otherPlayers.getChildren().forEach(function (otherPlayer) {
     if(playerInfo.playerId === otherPlayer.playerId){
@@ -62,6 +64,24 @@ this.socket.on('playerMoved', function (playerInfo){
     }
   });
 });
+
+// text 
+this.blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#0000FF'});
+this.redScoreText = this.add.text(584, 16, '', { fontSize: '50px', fill: '#FF0000' });
+// score update 
+this.socket.on('scoreUpdate', function (scores) {
+  self.blueScoreText.setText('Blue: ' + scores.blue);
+  self.redScoreText.setText('Red: ' + scores.red);
+});
+
+this.socket.on('starLocation', function (starLocation) {
+  if (self.star) self.star.destroy();
+  self.star = self.physics.add.image(starLocation.x, starLocation.y, 'star');
+  self.physics.add.overlap(self.ship, self.star, function () {
+    this.socket.emit('starCollected');
+  }, null, self);
+});
+
 }
 
 function update() {
