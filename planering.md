@@ -12,6 +12,11 @@ Ska försöka på den att funka först innan jag gör någon typ av stil eller a
 
 Ide: ett spel som likna tagen och poängen är räknad på hur länge man inte är tagen eller hur många man kan ta under en viss tid.
 
+En till ide: Ett spel som hot potato, den som holler bomben när den sprängs är ut ur spelet dock får man poäng
+när man håller i den. Man ska få så många poäng som möjlig och överleva så länge man kan.
+När man rör en annan spelare få dem bomben och den som hade bomben är säker i några sekunder. Den med mest poäng
+vid slutet av spelet vinner och deras poäng hamnar på en server med alla som har spelat (leader board). 
+
 Planering kommer garanterat att ändras beroende på hur länge tutorial kommer att ta, som är svårt att säga nu. Så hur mycket tid jag har för min egna ideer kommer att ändras. Samt kommer planeringen utökas.
 
 | Vecka 	| Tisdag                                	                   | Fredag                   	|
@@ -66,8 +71,10 @@ Har gjort stora delar av del 2 tutorial men är inte klar, ska fortsätta på de
 
 ## Fredag
 ### Vad gjordes sist
+Arbetade med tutorialn del 2, han en del av den och behövde fel söka vissa saker för att koden inte funkade. 
 
 ### Vad ska göras 
+Ska göra klart del 2
 
 ### Vad gick fel
 
