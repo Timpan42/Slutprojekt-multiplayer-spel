@@ -53,11 +53,34 @@ this.socket.on('disconnect', function (playerId){
 });
 
 this.cursors = this.input.keyboard.createCursorKeys();
+
+this.socket.on('playerMoved', function (playerInfo){
+  self.otherPlayers.getChildren().forEach(function (otherPlayer) {
+    if(playerInfo.playerId === otherPlayer.playerId){
+        otherPlayer.setRotation(playerInfo.rotation);
+        otherPlayer.setPosition(playerInfo.x, playerInfo.y);
+    }
+  });
+});
 }
 
 function update() {
 
   if (this.ship){
+
+    var x = this.ship.x;
+    var y = this.ship.y;
+    var r = this.ship.rotation;
+    if (this.ship.oldPosition && (x !== this.ship.oldPosition.x || y !== this.ship.oldPosition.y || r !== this.ship.oldPosition.rotation)) {
+      this.socket.emit('playerMovement', { x: this.ship.x, y: this.ship.y, rotation: this.ship.rotation });
+    }
+  
+    this.ship.oldPosition = {
+      x: this.ship.x,
+      y: this.ship.y,
+      rotation: this.ship.rotation
+    };
+
     if(this.cursors.left.isDown){
       this.ship.setAngularVelocity(-150);
     } else if(this.cursors.right.isDown){
@@ -67,7 +90,7 @@ function update() {
     }
 
     if(this.cursors.up.isDown){
-      this.physics.velocityFromRotation(this.ship.rotation + 1.5, 100, this.ship.body.acceleration);
+      this.physics.velocityFromRotation(this.ship.rotation + 1.5, -100, this.ship.body.acceleration);
     } else{
       this.ship.setAcceleration(0);
     }
