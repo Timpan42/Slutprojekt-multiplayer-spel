@@ -3,6 +3,14 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var players = {};
+var star = {
+  x: Math.floor(Math.random() * 700) + 50,
+  y: Math.floor(Math.random() * 500) + 50
+};
+var scores = {
+  blue: 0,
+  red: 0
+};
 
 io.on('connection', function (socket) {
   console.log('a user connected');
