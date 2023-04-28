@@ -77,8 +77,10 @@ Arbetade med tutorialn del 2, han en del av den och behövde fel söka vissa sak
 Ska göra klart del 2
 
 ### Vad gick fel
+Hade lite problem med att lägga koden rätt men gick att lösa ganska snabbt.
 
 ### Har gjort 
+Gjorde klart del 2, kan nu ta upp kärnor för att få poäng. 
 
 # veka 18
 ## Tisdag
