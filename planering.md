@@ -85,12 +85,16 @@ Gjorde klart del 2, kan nu ta upp kärnor för att få poäng.
 # veka 18
 ## Tisdag
 ### Vad gjordes sist
+Gjorde klar del 2 och är nu klar med tutorioln.
 
 ### Vad ska göras 
+Ska fixa att spelet uppdateras när en spelare går med och lämnar, så man inte behöver starta om spelet för att se andra spelaren. Utveckla på min ide, hitta assets och andra roliga saker. Kanske börja koda på den också. 
 
 ### Vad gick fel
 
+
 ### Har gjort 
+
 
 ## Fredag
 ### Vad gjordes sist
