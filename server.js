@@ -39,13 +39,10 @@ io.on('connection', function (socket) {
     console.log('user disconnected');
     // remove this player from our players object
     delete players[socket.id];
-    // emit a message to all players to remove this player
-    
-    /*
-    Orsakar ett throw new error!!!
-    Varje gång man koppla ifrån från sidan  
-    io.emit('disconnect', socket.id);
-  */     
+    // Broadcast to remove player that disconnect  
+    socket.broadcast.emit('deletePlayer', socket.id);
+
+  
   });
   socket.on('playerMovement', function(movementData){
     players[socket.id].x = movementData.x;

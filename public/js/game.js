@@ -1,3 +1,5 @@
+var playerAdd = false
+
 var config = {
   type: Phaser.AUTO,
   parent: 'phaser-example',
@@ -31,6 +33,7 @@ function create() {
 var self  = this;
 this.socket = io();
 this.otherPlayers = this.physics.add.group();
+
 this.socket.on('currentPlayers', function (players){
   Object.keys(players).forEach(function (id){
     if(players[id].playerId === self.socket.id){
@@ -41,11 +44,12 @@ this.socket.on('currentPlayers', function (players){
   });
 });
 
-this.socket.on('newPlayer', function (playerInfo){
-  addOtherPlayers(self, players[id]);
+this.socket.on('newPlayer', function (playerInfo) {
+  addOtherPlayers(self, playerInfo);
+  playerAdd = true;
 });
 
-this.socket.on('disconnect', function (playerId){
+this.socket.on('deletePlayer', function (playerId){
   self.otherPlayers.getChildren().forEach(function (otherPlayers){
     if(playerId === otherPlayers.playerId){
       otherPlayers.destroy();
@@ -86,6 +90,11 @@ this.socket.on('starLocation', function (starLocation) {
 
 function update() {
 
+  if(addPlayer === true){
+    
+  }
+  
+  
   if (this.ship){
 
     var x = this.ship.x;
