@@ -91,10 +91,10 @@ Gjorde klar del 2 och är nu klar med tutorioln.
 Ska fixa att spelet uppdateras när en spelare går med och lämnar, så man inte behöver starta om spelet för att se andra spelaren. Utveckla på min ide, hitta assets och andra roliga saker. Kanske börja koda på den också. 
 
 ### Vad gick fel
-
+Hade lite problem att fixa uppdaterings dellen men löste det.
 
 ### Har gjort 
-
+Har fixad uppdateringen och hittat assets för bilarna, håller på med att rita bakgrunden. 
 
 ## Fredag
 ### Vad gjordes sist
