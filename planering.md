@@ -98,10 +98,13 @@ Har fixad uppdateringen och hittat assets för bilarna, håller på med att rita
 
 ## Fredag
 ### Vad gjordes sist
+Letade och gjorde klart assets som spelet kan behöva. 
 
 ### Vad ska göras 
+Ska börja med att föra in alla assets i spelet, senare ska jag fixa bomb funktionen så att spelaren blir påverkad av den. 
 
 ### Vad gick fel
+
 
 ### Har gjort 
 
