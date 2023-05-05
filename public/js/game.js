@@ -57,7 +57,14 @@ this.socket.on('deletePlayer', function (playerId){
   });
 });
 
+// att komma åt keyboard 
 this.cursors = this.input.keyboard.createCursorKeys();
+this.keys = this.input.keyboard.addKeys({
+  W: Phaser.Input.Keyboard.KeyCodes.W,
+  S: Phaser.Input.Keyboard.KeyCodes.S,
+  A: Phaser.Input.Keyboard.KeyCodes.A,
+  D: Phaser.Input.Keyboard.KeyCodes.D
+});
 
 // movement 
 this.socket.on('playerMoved', function (playerInfo){
@@ -86,14 +93,10 @@ this.socket.on('starLocation', function (starLocation) {
   }, null, self);
 });
 
+  // end of create
 }
 
 function update() {
-
-  if(addPlayer === true){
-    
-  }
-  
   
   if (this.ship){
 
@@ -110,22 +113,25 @@ function update() {
       rotation: this.ship.rotation
     };
 
-    if(this.cursors.left.isDown){
+    if(this.cursors.left.isDown || this.keys.A.isDown){
       this.ship.setAngularVelocity(-150);
-    } else if(this.cursors.right.isDown){
+    } else if(this.cursors.right.isDown || this.keys.D.isDown){
       this.ship.setAngularVelocity(150);
     } else{
       this.ship.setAngularVelocity(0);
     }
 
-    if(this.cursors.up.isDown){
+    if(this.cursors.up.isDown || this.keys.W.isDown){
       this.physics.velocityFromRotation(this.ship.rotation + 1.5, -100, this.ship.body.acceleration);
+    } else if(this.cursors.down.isDown || this.keys.S.isDown){
+      this.physics.velocityFromRotation(this.ship.rotation + 1.5, 100, this.ship.body.acceleration);
     } else{
       this.ship.setAcceleration(0);
     }
       this.physics.world.wrap(this.ship, 5);
   } 
 
+  // end of update
  }
 
 function addPlayer(self, playerInfo){
