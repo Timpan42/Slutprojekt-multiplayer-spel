@@ -14,11 +14,11 @@ var scores = {
   red: 0,
   white: 0  
 };
-var holdingBomb = false
-var color = "";
 
 io.on('connection', function (socket) {
   console.log('a user connected');
+  var holdingBomb = false
+  const colors = ['blue', 'green','pink','red','white'];
 
   // create a new player and add it to our players object
   players[socket.id] = {
@@ -26,7 +26,7 @@ io.on('connection', function (socket) {
     x: Math.floor(Math.random() * 700) + 50,
     y: Math.floor(Math.random() * 500) + 50,
     playerId: socket.id,
-    team: (Math.floor(Math.random() * 2) == 0) ? 'red' : 'blue',
+    team: colors[Math.floor(Math.random() * colors.length)],
     holdBomb: holdingBomb
   };
   // send the players object to the new player
@@ -62,20 +62,23 @@ io.on('connection', function (socket) {
   //när en spelare tar upp en bomb
   socket.on('bombCollected', function () {
     if (players[socket.id].team === 'blue') {
-      scores.blue += 10;
+      scores.blue += 1;
+      players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'green') {
-      scores.green += 10;
+      scores.green += 1;
     } else if (players[socket.id].team === 'pink') {
-      scores.pink += 10;
+      scores.pink += 1;
     } else if (players[socket.id].team === 'red') {
-      scores.red += 10;
+      scores.red += 1;
     } else {
-      scores.white += 10;
+      scores.white += 1;
     }
+    io.emit('scoreUpdate', scores);
+    if (players[socket.id].holdBomb === false){
     bomb.x = Math.floor(Math.random() * 700) + 50;
     bomb.y = Math.floor(Math.random() * 500) + 50;
     io.emit('bombLocation', bomb);
-    io.emit('scoreUpdate', scores);
+    }
   });
   
 });
