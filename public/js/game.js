@@ -25,7 +25,7 @@ function preload() {
   this.load.image('background', 'assets/Background.png')
   this.load.image('ship', 'assets/BlueStrip.png');
   this.load.image('otherPlayer', 'assets/GreenStrip.png');
-  this.load.image('star', 'assets/star_gold.png');
+  this.load.image('bomb', 'assets/star_gold.png');
 
   // end of preload   
 }
@@ -84,21 +84,21 @@ self.background = self.add.image(400,300, 'background')
 self.background.setScale(1,0.75)
 
 // text 
-this.blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#0000FF'});
-this.redScoreText = this.add.text(584, 16, '', { fontSize: '50px', fill: '#FF0000' });
+if (playerId)
+this.blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle:'bold'});
 
 // score update 
 this.socket.on('scoreUpdate', function (scores) {
-  self.blueScoreText.setText('Blue: ' + scores.blue);
+  self.blueScoreText.setText('Score: ' + scores.blue);
   self.redScoreText.setText('Red: ' + scores.red);
 });
 
-// kärnor 
-this.socket.on('starLocation', function (starLocation) {
-  if (self.star) self.star.destroy();
-  self.star = self.physics.add.image(starLocation.x, starLocation.y, 'star');
-  self.physics.add.overlap(self.ship, self.star, function () {
-    this.socket.emit('starCollected');
+// bomb 
+this.socket.on('bombLocation', function (bombLocation) {
+  if (self.bomb) self.bomb.destroy();
+  self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
+  self.physics.add.overlap(self.ship, self.bomb, function () {
+    this.socket.emit('bombCollected');
   }, null, self);
 });
 

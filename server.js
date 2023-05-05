@@ -3,13 +3,16 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var players = {};
-var star = {
+var bomb = {
   x: Math.floor(Math.random() * 700) + 50,
   y: Math.floor(Math.random() * 500) + 50
 };
 var scores = {
   blue: 0,
-  red: 0
+  green: 0,
+  pink: 0,
+  red: 0,
+  white: 0  
 };
 
 io.on('connection', function (socket) {
@@ -21,13 +24,13 @@ io.on('connection', function (socket) {
     x: Math.floor(Math.random() * 700) + 50,
     y: Math.floor(Math.random() * 500) + 50,
     playerId: socket.id,
-    team: (Math.floor(Math.random() * 2) == 0) ? 'red' : 'blue'
+    color: (Math.floor(Math.random() * 2) == 0) ? 'red' : 'blue'
   };
   // send the players object to the new player
   socket.emit('currentPlayers', players);
   
-  // send the star object to the new player
-  socket.emit('starLocation',star);
+  // send the bomb object to the new player
+  socket.emit('bombLocation',bomb);
   
   // send the current scores
   socket.emit('scoreUpdate', scores);
@@ -53,15 +56,22 @@ io.on('connection', function (socket) {
 
   });
 
-  socket.on('starCollected', function () {
-    if (players[socket.id].team === 'red') {
+  //när en spelare tar upp en bomb
+  socket.on('bombCollected', function () {
+    if (players[socket.id].color === 'blue') {
+      scores.blue += 10;
+    } else if (players[socket.id].color === 'green') {
+      scores.green += 10;
+    } else if (players[socket.id].color === 'pink') {
+      scores.pink += 10;
+    } else if (players[socket.id].color === 'red') {
       scores.red += 10;
     } else {
-      scores.blue += 10;
+      scores.white += 10;
     }
-    star.x = Math.floor(Math.random() * 700) + 50;
-    star.y = Math.floor(Math.random() * 500) + 50;
-    io.emit('starLocation', star);
+    bomb.x = Math.floor(Math.random() * 700) + 50;
+    bomb.y = Math.floor(Math.random() * 500) + 50;
+    io.emit('bombLocation', bomb);
     io.emit('scoreUpdate', scores);
   });
   
