@@ -1,4 +1,4 @@
-var playerAdd = false
+
 
 var config = {
   type: Phaser.AUTO,
@@ -22,10 +22,12 @@ var config = {
 var game = new Phaser.Game(config);
 function preload() {
 
-  this.load.image('ship', 'assets/playerShip1_red.png');
-  this.load.image('otherPlayer', 'assets/playerShip3_blue.png');
+  this.load.image('background', 'assets/Background.png')
+  this.load.image('ship', 'assets/BlueStrip.png');
+  this.load.image('otherPlayer', 'assets/GreenStrip.png');
   this.load.image('star', 'assets/star_gold.png');
 
+  // end of preload   
 }
 
 function create() {
@@ -44,11 +46,12 @@ this.socket.on('currentPlayers', function (players){
   });
 });
 
+// add ny spelare  
 this.socket.on('newPlayer', function (playerInfo) {
   addOtherPlayers(self, playerInfo);
-  playerAdd = true;
 });
 
+// ta bort spelare 
 this.socket.on('deletePlayer', function (playerId){
   self.otherPlayers.getChildren().forEach(function (otherPlayers){
     if(playerId === otherPlayers.playerId){
@@ -76,15 +79,21 @@ this.socket.on('playerMoved', function (playerInfo){
   });
 });
 
+//background
+self.background = self.add.image(400,300, 'background')
+self.background.setScale(1,0.75)
+
 // text 
 this.blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#0000FF'});
 this.redScoreText = this.add.text(584, 16, '', { fontSize: '50px', fill: '#FF0000' });
+
 // score update 
 this.socket.on('scoreUpdate', function (scores) {
   self.blueScoreText.setText('Blue: ' + scores.blue);
   self.redScoreText.setText('Red: ' + scores.red);
 });
 
+// kärnor 
 this.socket.on('starLocation', function (starLocation) {
   if (self.star) self.star.destroy();
   self.star = self.physics.add.image(starLocation.x, starLocation.y, 'star');
