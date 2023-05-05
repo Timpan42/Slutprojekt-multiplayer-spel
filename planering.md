@@ -104,9 +104,10 @@ Letade och gjorde klart assets som spelet kan behöva.
 Ska börja med att föra in alla assets i spelet, senare ska jag fixa bomb funktionen så att spelaren blir påverkad av den. 
 
 ### Vad gick fel
-
+Jag har haft många problem med att ändra på den här koden. Jag trode det skulle vara enkelt att fixa färgerna med det hade jag problem med. Hade också problem med att få kärnan att inte försvinna när spelaren rör den, nu funkar det bara på den blåa spelaren. Hittar inte vad som gör att det inte funkar.
 
 ### Har gjort 
+Kan har mer färger i spelet och har börjat att årrna så att spelaren kan hålla i bomben. 
 
 # veka 19
 ## Tisdag
