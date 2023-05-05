@@ -84,8 +84,8 @@ self.background = self.add.image(400,300, 'background')
 self.background.setScale(1,0.75)
 
 // text 
-if (playerId)
 this.blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle:'bold'});
+this.redScoreText = this.add.text(500, 16, '', { fontSize: '50px', fill: '#000000', fontStyle:'bold'});
 
 // score update 
 this.socket.on('scoreUpdate', function (scores) {
@@ -93,7 +93,7 @@ this.socket.on('scoreUpdate', function (scores) {
   self.redScoreText.setText('Red: ' + scores.red);
 });
 
-// bomb 
+// kärnor 
 this.socket.on('bombLocation', function (bombLocation) {
   if (self.bomb) self.bomb.destroy();
   self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
