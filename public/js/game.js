@@ -136,9 +136,6 @@ function update() {
     }
     this.physics.world.wrap(this.ship, 5);
   }
-  if (this.keys.C.isDown) {
-    console.log(playerInfo)
-  }
 
   // end of update
 }
@@ -150,7 +147,7 @@ function addPlayer(self, playerInfo) {
   } else if (playerInfo.team === 'green') {
     self.ship.setTint(0x00FF00);
   } else if (playerInfo.team === 'pink') {
-    self.ship.setTint(0xFFC0CB);
+    self.ship.setTint(0xFFC0EA);
   } else if (playerInfo.team === 'red') {
     self.ship.setTint(0xff0000);
   } else {
@@ -169,7 +166,7 @@ function addOtherPlayers(self, playerInfo) {
   } else if (playerInfo.team === 'green') {
     otherPlayers.setTint(0x00FF00);
   } else if (playerInfo.team === 'pink') {
-    otherPlayers.setTint(0xFFC0CB);
+    otherPlayers.setTint(0xFFC0EA);
   } else if (playerInfo.team === 'red') {
     otherPlayers.setTint(0xff0000);
   } else {
