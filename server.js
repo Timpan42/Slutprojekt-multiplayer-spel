@@ -41,6 +41,9 @@ io.on('connection', function (socket) {
   // update all other players of the new player
   socket.broadcast.emit('newPlayer', players[socket.id]);
 
+  socket.broadcast.emit('player', players[socket.id]);
+
+
   socket.on('disconnect', function () {
     console.log('user disconnected');
     // remove this player from our players object
@@ -66,12 +69,16 @@ io.on('connection', function (socket) {
       players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'green') {
       scores.green += 1;
+      players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'pink') {
       scores.pink += 1;
+      players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'red') {
       scores.red += 1;
+      players[socket.id].holdBomb = true;
     } else {
       scores.white += 1;
+      players[socket.id].holdBomb = true;
     }
     io.emit('scoreUpdate', scores);
     if (players[socket.id].holdBomb === false){

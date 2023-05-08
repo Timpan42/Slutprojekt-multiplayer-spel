@@ -83,13 +83,22 @@ function create() {
   self.background.setScale(1, 0.75)
 
   // text 
-  this.blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' });
-  this.redScoreText = this.add.text(500, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' });
+  blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
+  greenScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
+  pinkScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
+  redScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
+  whiteScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
+
+
+
 
   // score update 
   this.socket.on('scoreUpdate', function (scores) {
-    self.blueScoreText.setText('Score: ' + scores.blue);
-    self.redScoreText.setText('Red: ' + scores.red);
+    blueScoreText.setText('Score: ' + scores.blue);
+    greenScoreText.setText('Score: ' + scores.green);
+    pinkScoreText.setText('Score: ' + scores.pink);
+    redScoreText.setText('Score: ' + scores.red);
+    whiteScoreText.setText('Score: ' + scores.white);
   });
 
   // kärnor 
@@ -105,6 +114,9 @@ function create() {
 }
 
 function update() {
+
+
+
   if (this.ship) {
     var x = this.ship.x;
     var y = this.ship.y;
@@ -153,6 +165,7 @@ function addPlayer(self, playerInfo) {
   } else {
     self.ship.setTint(0xFFFFFF);
   }
+  visibleText(playerInfo)
   console.log(playerInfo)
   self.ship.setDrag(100, 100);
   self.ship.setAngularDrag(100);
@@ -176,3 +189,17 @@ function addOtherPlayers(self, playerInfo) {
   otherPlayers.playerId = playerInfo.playerId;
   self.otherPlayers.add(otherPlayers);
 }
+
+function visibleText(playerInfo) {
+  if (playerInfo.team === 'blue') {
+    this.blueScoreText.setVisible(true);
+  } else if (playerInfo.team === 'green') {
+    this.greenScoreText.setVisible(true);
+  } else if (playerInfo.team === 'pink') {
+    this.pinkScoreText.setVisible(true);
+  } else if (playerInfo.team === 'red') {
+    this.redScoreText.setVisible(true);
+  } else {
+    this.whiteScoreText.setVisible(true);
+  }
+} 
