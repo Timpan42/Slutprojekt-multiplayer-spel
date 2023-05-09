@@ -112,8 +112,10 @@ Kan har mer färger i spelet och har börjat att årrna så att spelaren kan hå
 # veka 19
 ## Tisdag
 ### Vad gjordes sist
+Det finns olika färger man kan bli och beroende på färg kan man se dens team score. Spelaren kan inte ta upp stjärnan men man få poäng om man är på den. Det finns en bakgrund och spelarna är bilar. 
 
 ### Vad ska göras 
+Fixa stjärnan så man kan ta upp dem och spelaren håller den. Sedan ska man kunna ge bomben till andra. 
 
 ### Vad gick fel
 
