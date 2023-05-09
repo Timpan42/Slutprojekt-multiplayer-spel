@@ -101,9 +101,11 @@ function create() {
     whiteScoreText.setText('Score: ' + scores.white);
   });
 
-  // kärnor 
+  // bomb 
   this.socket.on('bombLocation', function (bombLocation) {
-    if (self.bomb) self.bomb.destroy();
+    if (self.bomb) {
+      self.bomb.destroy();
+    }
     self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
     self.physics.add.overlap(self.ship, self.bomb, function () {
       this.socket.emit('bombCollected');

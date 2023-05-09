@@ -12,13 +12,13 @@ var scores = {
   green: 0,
   pink: 0,
   red: 0,
-  white: 0  
+  white: 0
 };
 
 io.on('connection', function (socket) {
   console.log('a user connected');
   var holdingBomb = false
-  const colors = ['blue', 'green','pink','red','white'];
+  const colors = ['blue', 'green', 'pink', 'red', 'white'];
 
   // create a new player and add it to our players object
   players[socket.id] = {
@@ -31,18 +31,15 @@ io.on('connection', function (socket) {
   };
   // send the players object to the new player
   socket.emit('currentPlayers', players);
-  
+
   // send the bomb object to the new player
-  socket.emit('bombLocation',bomb);
-  
+  socket.emit('bombLocation', bomb);
+
   // send the current scores
   socket.emit('scoreUpdate', scores);
-  
+
   // update all other players of the new player
   socket.broadcast.emit('newPlayer', players[socket.id]);
-
-  socket.broadcast.emit('player', players[socket.id]);
-
 
   socket.on('disconnect', function () {
     console.log('user disconnected');
@@ -51,9 +48,9 @@ io.on('connection', function (socket) {
     // Broadcast to remove player that disconnect  
     socket.broadcast.emit('deletePlayer', socket.id);
 
-  
+
   });
-  socket.on('playerMovement', function(movementData){
+  socket.on('playerMovement', function (movementData) {
     players[socket.id].x = movementData.x;
     players[socket.id].y = movementData.y;
     players[socket.id].rotation = movementData.rotation;
@@ -81,13 +78,13 @@ io.on('connection', function (socket) {
       players[socket.id].holdBomb = true;
     }
     io.emit('scoreUpdate', scores);
-    if (players[socket.id].holdBomb === false){
-    bomb.x = Math.floor(Math.random() * 700) + 50;
-    bomb.y = Math.floor(Math.random() * 500) + 50;
-    io.emit('bombLocation', bomb);
+    if (players[socket.id].holdBomb === true) {
+      bomb.x = Math.floor(Math.random() * 700) + 50;
+      bomb.y = Math.floor(Math.random() * 500) + 50;
     }
+    io.emit('bombLocation', bomb);
   });
-  
+
 });
 
 
