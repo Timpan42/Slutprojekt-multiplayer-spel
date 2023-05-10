@@ -35,6 +35,9 @@ io.on('connection', function (socket) {
   // send the bomb object to the new player
   socket.emit('bombLocation', bomb);
 
+  // send the bomb to other players
+  socket.emit('playerOverlap', players);
+
   // send the current scores
   socket.emit('scoreUpdate', scores);
 
@@ -77,34 +80,45 @@ io.on('connection', function (socket) {
       scores.white += 1;
       players[socket.id].holdBomb = true;
     }
-
+      
     io.emit('scoreUpdate', scores);
+    
+    // spelaren håller bomben
     if (players[socket.id].holdBomb === true) {
      bomb.x = players[socket.id].x
      bomb.y = players[socket.id].y
 
-     if(bomb.y <= 5){
-      bomb.y = 595
+     // om spelaren far utanför skärmen 
+     if(bomb.y <= -2){
+      bomb.y = 560
     }
-     if(bomb.y >= 595){
-      bomb.y = 5
+     if(bomb.y >= 602){
+      bomb.y = 40
     }
-     if(bomb.x <= 5){
-      bomb.x = 795
+     if(bomb.x <= -2){
+      bomb.x = 760
     }
-     if(bomb.x >= 795){
-      bomb.x = 5
+     if(bomb.x >= 802){
+      bomb.x = 40
     }
     
     }
+
     if (players[socket.id].holdBomb === false) {
       bomb.x = Math.floor(Math.random() * 700) + 50;
       bomb.y = Math.floor(Math.random() * 500) + 50;
     }
     io.emit('bombLocation', bomb);
   });
-
 });
+
+/*socket.on('playersCollided', function () {
+  if(players[socket.id].holdBomb === true){
+      players[socket.id]
+  } 
+
+});*/
+
 
 
 

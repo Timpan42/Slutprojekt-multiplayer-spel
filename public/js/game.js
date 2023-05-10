@@ -101,7 +101,7 @@ function create() {
     whiteScoreText.setText('Score: ' + scores.white);
   });
 
-  // bomb 
+  // om spelaren tar bomben 
   this.socket.on('bombLocation', function (bombLocation) {
     if (self.bomb) {
       self.bomb.destroy();
@@ -112,6 +112,15 @@ function create() {
       self.bomb.destroy();
     }, null, self);
   });
+
+  // om spelaren rör en annan spelare som har en bomb så byts dem.
+ /* this.socket.on('playerOverlap', function(playerOverlap){
+    self.physics.add.overlap(self.ship, self.otherPlayers, function () {
+      this.socket.emit('playersCollided');
+
+    }, null, self);
+
+  });*/
 
   // end of create
 }
@@ -156,7 +165,7 @@ function update() {
 }
 
 function addPlayer(self, playerInfo) {
-  self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(53, 40);
+  self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(40, 40);
   if (playerInfo.team === 'blue') {
     self.ship.setTint(0x0000ff);
   } else if (playerInfo.team === 'green') {
@@ -176,7 +185,7 @@ function addPlayer(self, playerInfo) {
 }
 
 function addOtherPlayers(self, playerInfo) {
-  const otherPlayers = self.add.sprite(playerInfo.x, playerInfo.y, 'otherPlayer').setOrigin(0.5, 0.5).setDisplaySize(53, 40);
+  const otherPlayers = self.add.sprite(playerInfo.x, playerInfo.y, 'otherPlayer').setOrigin(0.5, 0.5).setDisplaySize(40, 40);
   if (playerInfo.team === 'blue') {
     otherPlayers.setTint(0x0000ff);
   } else if (playerInfo.team === 'green') {
