@@ -77,26 +77,26 @@ io.on('connection', function (socket) {
       scores.white += 1;
       players[socket.id].holdBomb = true;
     }
+
     io.emit('scoreUpdate', scores);
     if (players[socket.id].holdBomb === true) {
      bomb.x = players[socket.id].x
      bomb.y = players[socket.id].y
-     if(bomb.x <= 10){
-      bomb.x = 590
-     }
-     if(bomb.x >= 590){
-      bomb.x = 10
-     }
-     if(bomb.y <= 10){
-      bomb.y = 790
-     }
-     if(bomb.y >= 790){
-      bomb.y = 10
-     }
-     bomb.x = players[socket.id].x
-     bomb.y = players[socket.id].y
-    }
 
+     if(bomb.y <= 5){
+      bomb.y = 595
+    }
+     if(bomb.y >= 595){
+      bomb.y = 5
+    }
+     if(bomb.x <= 5){
+      bomb.x = 795
+    }
+     if(bomb.x >= 795){
+      bomb.x = 5
+    }
+    
+    }
     if (players[socket.id].holdBomb === false) {
       bomb.x = Math.floor(Math.random() * 700) + 50;
       bomb.y = Math.floor(Math.random() * 500) + 50;
