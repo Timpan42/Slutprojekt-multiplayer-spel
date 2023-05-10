@@ -109,6 +109,7 @@ function create() {
     self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
     self.physics.add.overlap(self.ship, self.bomb, function () {
       this.socket.emit('bombCollected');
+      self.bomb.destroy();
     }, null, self);
   });
 
