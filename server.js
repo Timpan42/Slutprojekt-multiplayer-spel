@@ -1,11 +1,12 @@
+const { DESTRUCTION } = require('dns');
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var players = {};
 var bomb = {
-  x: Math.floor(Math.random() * 700) + 50,
-  y: Math.floor(Math.random() * 500) + 50
+  x: 400,
+  y: 300
 };
 var scores = {
   blue: 0,
@@ -64,22 +65,21 @@ io.on('connection', function (socket) {
 
   //när en spelare tar upp en bomb
   socket.on('bombCollected', function () {
+    setTimeout(bombExplode, 3000);
+
     if (players[socket.id].team === 'blue') {
       scores.blue += 1;
-      players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'green') {
       scores.green += 1;
-      players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'pink') {
       scores.pink += 1;
-      players[socket.id].holdBomb = true;
     } else if (players[socket.id].team === 'red') {
       scores.red += 1;
-      players[socket.id].holdBomb = true;
     } else {
       scores.white += 1;
-      players[socket.id].holdBomb = true;
     }
+    players[socket.id].holdBomb = true;
+
       
     io.emit('scoreUpdate', scores);
     
@@ -105,26 +105,27 @@ io.on('connection', function (socket) {
     }
 
     if (players[socket.id].holdBomb === false) {
-      bomb.x = Math.floor(Math.random() * 700) + 50;
-      bomb.y = Math.floor(Math.random() * 500) + 50;
+     bombReset();
     }
     io.emit('bombLocation', bomb);
   });
 
-
   socket.on('playersCollided', function () {
     
-    // if(players[socket.id].holdBomb === true){
-    //     players[socket.id]
-    // } 
-  
   });
   
 });
 
+function bombReset(){
+  bomb.x = 400;
+  bomb.y = 300;
+  io.emit('bombLocation', bomb);
+}
 
-
-
+function bombExplode(){
+    io.emit('destroyBomb')
+    bombReset(); 
+  }
 
 app.use(express.static(__dirname + '/public'));
 

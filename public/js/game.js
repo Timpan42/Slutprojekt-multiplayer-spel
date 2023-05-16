@@ -118,9 +118,12 @@ function create() {
     self.physics.add.overlap(self.ship, self.otherPlayers, function () {
       this.socket.emit('playersCollided');
       this.socket.emit('bombCollected');
-      self.bomb.destroy();
     }, null, self);
+  });
 
+  this.socket.on('destroyBomb', function(bombLocation){
+    self.bomb.destroy();
+    self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
   });
 
   // end of create
