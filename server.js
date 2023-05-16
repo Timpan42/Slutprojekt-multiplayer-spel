@@ -110,14 +110,18 @@ io.on('connection', function (socket) {
     }
     io.emit('bombLocation', bomb);
   });
+
+
+  socket.on('playersCollided', function () {
+    
+    // if(players[socket.id].holdBomb === true){
+    //     players[socket.id]
+    // } 
+  
+  });
+  
 });
 
-/*socket.on('playersCollided', function () {
-  if(players[socket.id].holdBomb === true){
-      players[socket.id]
-  } 
-
-});*/
 
 
 

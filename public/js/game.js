@@ -114,13 +114,14 @@ function create() {
   });
 
   // om spelaren rör en annan spelare som har en bomb så byts dem.
- /* this.socket.on('playerOverlap', function(playerOverlap){
+ this.socket.on('playerOverlap', function(playerOverlap){
     self.physics.add.overlap(self.ship, self.otherPlayers, function () {
       this.socket.emit('playersCollided');
-
+      this.socket.emit('bombCollected');
+      self.bomb.destroy();
     }, null, self);
 
-  });*/
+  });
 
   // end of create
 }

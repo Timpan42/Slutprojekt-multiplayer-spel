@@ -118,8 +118,11 @@ Det finns olika färger man kan bli och beroende på färg kan man se dens team 
 Fixa stjärnan så man kan ta upp dem och spelaren håller den. Sedan ska man kunna ge bomben till andra. 
 
 ### Vad gick fel
+Jag var sjuk så jag jobbade inte så mycket.
+Gjorde arbetet på onsdag 
 
 ### Har gjort 
+Man kan hålla bomben och kan ta med den om man hamnar utanför karten och kommer runt.
 
 ## Fredag
 ### Vad gjordes sist
@@ -127,14 +130,17 @@ Fixa stjärnan så man kan ta upp dem och spelaren håller den. Sedan ska man ku
 ### Vad ska göras 
 
 ### Vad gick fel
+Blev sjuk, jobbade inte 
 
 ### Har gjort 
 
 # veka 20
 ## Tisdag
 ### Vad gjordes sist
+Sist gjorde jag det möjligt att kuna hålla bomben och få poäng, samt ta med om man hamnar utan för kartan 
 
 ### Vad ska göras 
+Ska göra om man rör en annan spelare så ska man kuna sno/ge bomben till andra spelaren. 
 
 ### Vad gick fel
 
