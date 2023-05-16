@@ -16,11 +16,15 @@ var config = {
     update: update
   }
 };
+const road =  'road'
+const road_ro = 'road_rotation'
 
 var game = new Phaser.Game(config);
 function preload() {
 
   this.load.image('background', 'assets/Background.png')
+  this.load.image(road, 'assets/road.png')
+  this.load.image(road_ro, 'assets/road_rotation.png')
   this.load.image('ship', 'assets/BlueStrip.png');
   this.load.image('otherPlayer', 'assets/GreenStrip.png');
   this.load.image('bomb', 'assets/star_gold.png');
@@ -82,15 +86,27 @@ function create() {
   self.background = self.add.image(400, 300, 'background')
   self.background.setScale(1, 0.75)
 
+  // wall 
+  self.road = self.add.image(152,13, road).setScale(0.8,1);
+  self.road = self.add.image(152,587, road).setScale(0.8,1);
+  self.road = self.add.image(672,13, road).setScale(0.8,1);
+  self.road = self.add.image(672,587, road).setScale(0.8,1);
+  self.road = self.add.image(18,300, road_ro).setScale(1.2,1.4);
+  self.road = self.add.image(782,300, road_ro).setScale(1.2,1.4);
+
+  self.road = self.add.image(262.7,189.1, road_ro).setScale(1.58,0.41);
+  self.road = self.add.image(562.7,189.1, road_ro).setScale(1.58,0.41);
+  self.road = self.add.image(262.7,410.4, road_ro).setScale(1.58,0.41);
+  self.road = self.add.image(562.7,410.4, road_ro).setScale(1.58,0.41);
+
+
+
   // text 
   blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
   greenScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
   pinkScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
   redScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
   whiteScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
-
-
-
 
   // score update 
   this.socket.on('scoreUpdate', function (scores) {
@@ -126,6 +142,10 @@ function create() {
     self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
   });
 
+
+  // this.physics.add.collider(self.ship, self.road, function(ship, road){
+    
+  // })
   // end of create
 }
 
