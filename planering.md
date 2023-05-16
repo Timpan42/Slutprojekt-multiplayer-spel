@@ -144,9 +144,11 @@ Ska göra om man rör en annan spelare så ska man kuna sno/ge bomben till andra
 Ska göra vägar där spelaren inte kan köra. 
 
 ### Vad gick fel
+collidern funkar inte 
 
 ### Har gjort 
 Gjorde klart att man kan sno/ge bomben till andra spelare samt kan det komma till backa efter att har sprängs. 
+Det finns walls som ska få en colliders så man inte kan göra igenom dem.
 
 ## Fredag
 ### Vad gjordes sist
