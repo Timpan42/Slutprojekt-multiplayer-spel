@@ -141,10 +141,12 @@ Sist gjorde jag det möjligt att kuna hålla bomben och få poäng, samt ta med 
 
 ### Vad ska göras 
 Ska göra om man rör en annan spelare så ska man kuna sno/ge bomben till andra spelaren. 
+Ska göra vägar där spelaren inte kan köra. 
 
 ### Vad gick fel
 
 ### Har gjort 
+Gjorde klart att man kan sno/ge bomben till andra spelare samt kan det komma till backa efter att har sprängs. 
 
 ## Fredag
 ### Vad gjordes sist
