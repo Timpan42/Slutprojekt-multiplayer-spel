@@ -90,20 +90,20 @@ function create() {
 
   // wall 
     // vänster up/ner
-  self.road1 = this.physics.add.image(152,13, road).setScale(0.8,1);
-  self.road2 = this.physics.add.image(152,587, road).setScale(0.8,1);
+  self.road1 = this.physics.add.image(152,13, road).setScale(0.8,1).setVisible(false);
+  self.road2 = this.physics.add.image(152,587, road).setScale(0.8,1).setVisible(false);
     // höger up/ner
-  self.road3 = this.physics.add.image(672,13, road).setScale(0.8,1);
-  self.road4 = this.physics.add.image(672,587, road).setScale(0.8,1);
+  self.road3 = this.physics.add.image(672,13, road).setScale(0.8,1).setVisible(false);
+  self.road4 = this.physics.add.image(672,587, road).setScale(0.8,1).setVisible(false);
     // sidor höger/vänster
-  self.road5 = this.physics.add.image(18,300, road_ro).setScale(1.2,1.4);
-  self.road6 = this.physics.add.image(782,300, road_ro).setScale(1.2,1.4);
+  self.road5 = this.physics.add.image(18,300, road_ro).setScale(1.2,1.4).setVisible(false);
+  self.road6 = this.physics.add.image(782,300, road_ro).setScale(1.2,1.4).setVisible(false);
     // mitten up vänster/höger
-  self.road7 = this.physics.add.image(262.7,189.1, road_ro).setScale(1.58,0.41);
-  self.road8 = this.physics.add.image(562.7,189.1, road_ro).setScale(1.58,0.41);
+  self.road7 = this.physics.add.image(262.7,189.1, road_ro).setScale(1.58,0.41).setVisible(false);
+  self.road8 = this.physics.add.image(562.7,189.1, road_ro).setScale(1.58,0.41).setVisible(false);
     // mitten ner vänster/höger
-  self.road9 = this.physics.add.image(262.7,410.4, road_ro).setScale(1.58,0.41);
-  self.road10 = this.physics.add.image(562.7,410.4, road_ro).setScale(1.58,0.41);
+  self.road9 = this.physics.add.image(262.7,410.4, road_ro).setScale(1.58,0.41).setVisible(false);
+  self.road10 = this.physics.add.image(562.7,410.4, road_ro).setScale(1.58,0.41).setVisible(false);
 
   // text 
   blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
@@ -141,7 +141,7 @@ function create() {
       this.socket.emit('bombCollected');
     }, null, self);
   });
-  
+
   // if player overlaps with wall
   this.socket.on('playerCollideWall', function () {
     self.physics.add.overlap(self.ship, self.road1, function (ship, road) {
