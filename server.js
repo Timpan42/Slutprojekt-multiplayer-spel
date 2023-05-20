@@ -3,10 +3,14 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
 var players = {};
+
+var playerExplode = false 
 var bomb = {
   x: 400,
-  y: 300
+  y: 300,
+  explode: playerExplode
 };
 var scores = {
   blue: 0,
@@ -20,6 +24,7 @@ io.on('connection', function (socket) {
   console.log('a user connected');
   var holdingBomb = false
   const colors = ['blue', 'green', 'pink', 'red', 'white'];
+  var life = true
 
   // create a new player and add it to our players object
   players[socket.id] = {
@@ -28,7 +33,8 @@ io.on('connection', function (socket) {
     y: Math.floor(Math.random() * 500) + 50,
     playerId: socket.id,
     team: colors[Math.floor(Math.random() * colors.length)],
-    holdBomb: holdingBomb
+    holdBomb: holdingBomb,
+    playerLife: life
   };
   // send the players object to the new player
   socket.emit('currentPlayers', players);
@@ -38,6 +44,8 @@ io.on('connection', function (socket) {
 
   // send the bomb to other players
   socket.emit('playerOverlap', players);
+
+  socket.emit('playerCollideWall', players)
 
   // send the current scores
   socket.emit('scoreUpdate', scores);
@@ -65,7 +73,7 @@ io.on('connection', function (socket) {
 
   //när en spelare tar upp en bomb
   socket.on('bombCollected', function () {
-    setTimeout(bombExplode, 3000);
+    setTimeout(bombExplode, 30000);
 
     if (players[socket.id].team === 'blue') {
       scores.blue += 1;
@@ -101,19 +109,27 @@ io.on('connection', function (socket) {
      if(bomb.x >= 802){
       bomb.x = 40
     }
-    
     }
 
     if (players[socket.id].holdBomb === false) {
      bombReset();
     }
+
+    if (players[socket.id].holdBomb === true && bombExplode === true){
+        life = false
+    }
+
     io.emit('bombLocation', bomb);
   });
 
   socket.on('playersCollided', function () {
     
   });
-  
+
+  socket.on('playersWall', function () {
+    
+  });
+
 });
 
 function bombReset(){
@@ -124,6 +140,7 @@ function bombReset(){
 
 function bombExplode(){
     io.emit('destroyBomb')
+    playerExplode = true
     bombReset(); 
   }
 

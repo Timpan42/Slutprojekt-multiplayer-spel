@@ -1,3 +1,7 @@
+const road = 'road'
+const road_ro = 'road_rotation'
+
+
 var config = {
   type: Phaser.AUTO,
   parent: 'phaser-example',
@@ -16,8 +20,6 @@ var config = {
     update: update
   }
 };
-const road =  'road'
-const road_ro = 'road_rotation'
 
 var game = new Phaser.Game(config);
 function preload() {
@@ -87,19 +89,21 @@ function create() {
   self.background.setScale(1, 0.75)
 
   // wall 
-  self.road = self.add.image(152,13, road).setScale(0.8,1);
-  self.road = self.add.image(152,587, road).setScale(0.8,1);
-  self.road = self.add.image(672,13, road).setScale(0.8,1);
-  self.road = self.add.image(672,587, road).setScale(0.8,1);
-  self.road = self.add.image(18,300, road_ro).setScale(1.2,1.4);
-  self.road = self.add.image(782,300, road_ro).setScale(1.2,1.4);
-
-  self.road = self.add.image(262.7,189.1, road_ro).setScale(1.58,0.41);
-  self.road = self.add.image(562.7,189.1, road_ro).setScale(1.58,0.41);
-  self.road = self.add.image(262.7,410.4, road_ro).setScale(1.58,0.41);
-  self.road = self.add.image(562.7,410.4, road_ro).setScale(1.58,0.41);
-
-
+    // vänster up/ner
+  self.road1 = this.physics.add.image(152,13, road).setScale(0.8,1);
+  self.road2 = this.physics.add.image(152,587, road).setScale(0.8,1);
+    // höger up/ner
+  self.road3 = this.physics.add.image(672,13, road).setScale(0.8,1);
+  self.road4 = this.physics.add.image(672,587, road).setScale(0.8,1);
+    // sidor höger/vänster
+  self.road5 = this.physics.add.image(18,300, road_ro).setScale(1.2,1.4);
+  self.road6 = this.physics.add.image(782,300, road_ro).setScale(1.2,1.4);
+    // mitten up vänster/höger
+  self.road7 = this.physics.add.image(262.7,189.1, road_ro).setScale(1.58,0.41);
+  self.road8 = this.physics.add.image(562.7,189.1, road_ro).setScale(1.58,0.41);
+    // mitten ner vänster/höger
+  self.road9 = this.physics.add.image(262.7,410.4, road_ro).setScale(1.58,0.41);
+  self.road10 = this.physics.add.image(562.7,410.4, road_ro).setScale(1.58,0.41);
 
   // text 
   blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
@@ -117,6 +121,7 @@ function create() {
     whiteScoreText.setText('Score: ' + scores.white);
   });
 
+
   // om spelaren tar bomben 
   this.socket.on('bombLocation', function (bombLocation) {
     if (self.bomb) {
@@ -130,28 +135,63 @@ function create() {
   });
 
   // om spelaren rör en annan spelare som har en bomb så byts dem.
- this.socket.on('playerOverlap', function(playerOverlap){
+  this.socket.on('playerOverlap', function (playerOverlap) {
     self.physics.add.overlap(self.ship, self.otherPlayers, function () {
       this.socket.emit('playersCollided');
       this.socket.emit('bombCollected');
     }, null, self);
   });
+  
+  // if player overlaps with wall
+  this.socket.on('playerCollideWall', function () {
+    self.physics.add.overlap(self.ship, self.road1, function (ship, road) {
+      ship.setVelocity(0);
+      ship.y += 1
+    }, null, self);
+    self.physics.add.overlap(self.ship, self.road2, function (ship, road) {
+      ship.setVelocity(0);
+      ship.y -= 1
+    }, null, self);
 
-  this.socket.on('destroyBomb', function(bombLocation){
-    self.bomb.destroy();
-    self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
-  });
+    self.physics.add.overlap(self.ship, self.road3, function (ship, road) {
+      ship.setVelocity(0);
+      ship.y += 1
+    }, null, self);
+    self.physics.add.overlap(self.ship, self.road4, function (ship, road) {
+      ship.setVelocity(0);
+      ship.y -= 1
+    }, null, self);
+
+    self.physics.add.overlap(self.ship, self.road5, function (ship, road) {
+      ship.setVelocity(0);
+      ship.x += 1
+    }, null, self);
+    self.physics.add.overlap(self.ship, self.road6, function (ship, road) {
+      ship.setVelocity(0);
+      ship.x -= 1
+    }, null, self);
+
+    self.physics.add.overlap(self.ship, self.road7, function (ship, road) {
+      ship.setVelocity(0);
+    }, null, self);
+    self.physics.add.overlap(self.ship, self.road8, function (ship, road) {
+      ship.setVelocity(0);
+    }, null, self);
+
+    self.physics.add.overlap(self.ship, self.road9, function (ship, road) {
+      ship.setVelocity(0);  
+    }, null, self);
+    self.physics.add.overlap(self.ship, self.road10, function (ship, road) {
+      ship.setVelocity(0);
+    }, null, self);
+
+  })
 
 
-  // this.physics.add.collider(self.ship, self.road, function(ship, road){
-    
-  // })
   // end of create
 }
 
 function update() {
-
-
 
   if (this.ship) {
     var x = this.ship.x;
