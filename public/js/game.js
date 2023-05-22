@@ -99,11 +99,11 @@ function create() {
   self.road5 = this.physics.add.image(18,300, road_ro).setScale(1.2,1.4).setVisible(false);
   self.road6 = this.physics.add.image(782,300, road_ro).setScale(1.2,1.4).setVisible(false);
     // mitten up vänster/höger
-  self.road7 = this.physics.add.image(262.7,189.1, road_ro).setScale(1.58,0.41).setVisible(false);
-  self.road8 = this.physics.add.image(562.7,189.1, road_ro).setScale(1.58,0.41).setVisible(false);
+  self.road7 = this.physics.add.image(262.7,189.1, road_ro).setScale(1.40,0.39).setVisible(false);
+  self.road8 = this.physics.add.image(562.7,189.1, road_ro).setScale(1.40,0.39).setVisible(false);
     // mitten ner vänster/höger
-  self.road9 = this.physics.add.image(262.7,410.4, road_ro).setScale(1.58,0.41).setVisible(false);
-  self.road10 = this.physics.add.image(562.7,410.4, road_ro).setScale(1.58,0.41).setVisible(false);
+  self.road9 = this.physics.add.image(262.7,410.4, road_ro).setScale(1.40,0.39).setVisible(false);
+  self.road10 = this.physics.add.image(562.7,410.4, road_ro).setScale(1.40,0.39).setVisible(false);
 
   // text 
   blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
@@ -114,11 +114,11 @@ function create() {
 
   // score update 
   this.socket.on('scoreUpdate', function (scores) {
-    blueScoreText.setText('Score: ' + scores.blue);
-    greenScoreText.setText('Score: ' + scores.green);
-    pinkScoreText.setText('Score: ' + scores.pink);
-    redScoreText.setText('Score: ' + scores.red);
-    whiteScoreText.setText('Score: ' + scores.white);
+    blueScoreText.setText('Score: ' + Math.round(scores.blue));
+    greenScoreText.setText('Score: ' + Math.round(scores.green))
+    pinkScoreText.setText('Score: ' + Math.round(scores.pink));
+    redScoreText.setText('Score: ' + Math.round(scores.red));
+    whiteScoreText.setText('Score: ' + Math.round(scores.white));
   });
 
 

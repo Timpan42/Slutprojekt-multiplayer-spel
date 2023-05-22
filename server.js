@@ -4,9 +4,12 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+var pointsPerSec = 0.1
+
 var players = {};
 
-var playerExplode = false 
+var bombTimer = 30 * 1000;
+var playerExplode = false
 var bomb = {
   x: 400,
   y: 300,
@@ -73,76 +76,79 @@ io.on('connection', function (socket) {
 
   //när en spelare tar upp en bomb
   socket.on('bombCollected', function () {
-    setTimeout(bombExplode, 30000);
-
-    if (players[socket.id].team === 'blue') {
-      scores.blue += 1;
-    } else if (players[socket.id].team === 'green') {
-      scores.green += 1;
-    } else if (players[socket.id].team === 'pink') {
-      scores.pink += 1;
-    } else if (players[socket.id].team === 'red') {
-      scores.red += 1;
-    } else {
-      scores.white += 1;
-    }
+    setTimeout(bombExplode, bombTimer);
     players[socket.id].holdBomb = true;
+    if (players[socket.id].holdBomb = true) {
 
-      
-    io.emit('scoreUpdate', scores);
-    
-    // spelaren håller bomben
-    if (players[socket.id].holdBomb === true) {
-     bomb.x = players[socket.id].x
-     bomb.y = players[socket.id].y
+      // poäng till spelaren som håller bomben 
+      if (players[socket.id].team === 'blue') {
+        scores.blue += pointsPerSec;
+      } else if (players[socket.id].team === 'green') {
+        scores.green += pointsPerSec;
+      } else if (players[socket.id].team === 'pink') {
+        scores.pink += pointsPerSec;
+      } else if (players[socket.id].team === 'red') {
+        scores.red += pointsPerSec;
+      } else {
+        scores.white += pointsPerSec;
+      }
 
-     // om spelaren far utanför skärmen 
-     if(bomb.y <= -2){
-      bomb.y = 560
-    }
-     if(bomb.y >= 602){
-      bomb.y = 40
-    }
-     if(bomb.x <= -2){
-      bomb.x = 760
-    }
-     if(bomb.x >= 802){
-      bomb.x = 40
-    }
-    }
+      io.emit('scoreUpdate', scores);
 
+      // spelaren håller bomben
+      bomb.x = players[socket.id].x
+      bomb.y = players[socket.id].y
+
+    // om spelaren far utanför skärmen 
+      if (bomb.y <= -2) {
+        bomb.y = 560
+      }
+      if (bomb.y >= 602) {
+        bomb.y = 40
+      }
+      if (bomb.x <= -2) {
+        bomb.x = 760
+      }
+      if (bomb.x >= 802) {
+        bomb.x = 40
+      }
+    }
+      // om spelaren håller i bomben men den borde inte kuna det
     if (players[socket.id].holdBomb === false) {
-     bombReset();
+      bombReset();
     }
 
-    if (players[socket.id].holdBomb === true && bombExplode === true){
-        life = false
+      // om spelaren håller i bomben och den explodera 
+    if (players[socket.id].holdBomb === true && bombExplode === true) {
+      life = false
+      players[socket.id].holdBomb = false
     }
 
     io.emit('bombLocation', bomb);
   });
 
   socket.on('playersCollided', function () {
-    
+
   });
 
   socket.on('playersWall', function () {
-    
+
   });
 
 });
 
-function bombReset(){
+function bombReset() {
   bomb.x = 400;
   bomb.y = 300;
+  players.holdBomb = false
   io.emit('bombLocation', bomb);
 }
 
-function bombExplode(){
-    io.emit('destroyBomb')
-    playerExplode = true
-    bombReset(); 
-  }
+function bombExplode() {
+  io.emit('destroyBomb')
+  playerExplode = true
+  bombReset();
+}
 
 app.use(express.static(__dirname + '/public'));
 
