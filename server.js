@@ -45,6 +45,9 @@ io.on('connection', function (socket) {
   // send the bomb object to the new player
   socket.emit('bombLocation', bomb);
 
+  socket.emit('consolePlayer', players);
+
+
   // send the bomb to other players
   socket.emit('playerOverlap', players);
 
@@ -76,7 +79,6 @@ io.on('connection', function (socket) {
 
   //när en spelare tar upp en bomb
   socket.on('bombCollected', function () {
-    setTimeout(bombExplode, bombTimer);
     players[socket.id].holdBomb = true;
     if (players[socket.id].holdBomb = true) {
 
@@ -99,7 +101,7 @@ io.on('connection', function (socket) {
       bomb.x = players[socket.id].x
       bomb.y = players[socket.id].y
 
-    // om spelaren far utanför skärmen 
+      // om spelaren far utanför skärmen 
       if (bomb.y <= -2) {
         bomb.y = 560
       }
@@ -113,22 +115,25 @@ io.on('connection', function (socket) {
         bomb.x = 40
       }
     }
-      // om spelaren håller i bomben men den borde inte kuna det
+    // om spelaren håller i bomben men den borde inte kuna det
     if (players[socket.id].holdBomb === false) {
       bombReset();
     }
 
-      // om spelaren håller i bomben och den explodera 
+    // om spelaren håller i bomben och den explodera 
     if (players[socket.id].holdBomb === true && bombExplode === true) {
       life = false
       players[socket.id].holdBomb = false
     }
-
+    setTimeout(bombExplode, bombTimer);
+    io.emit('consolePlayer', players)
     io.emit('bombLocation', bomb);
   });
 
   socket.on('playersCollided', function () {
-
+    if (players[socket.id].holdBomb === true) {
+      players[socket.id].holdBomb === false
+    }
   });
 
   socket.on('playersWall', function () {

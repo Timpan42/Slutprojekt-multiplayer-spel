@@ -184,8 +184,12 @@ function create() {
     self.physics.add.overlap(self.ship, self.road10, function (ship, road) {
       ship.setVelocity(0);
     }, null, self);
-
   })
+
+  this.socket.on('consolePlayer', function(players) {
+    console.log(players)
+  })
+
 
 
   // end of create
