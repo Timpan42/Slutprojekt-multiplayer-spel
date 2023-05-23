@@ -142,7 +142,7 @@ function create() {
       this.socket.on('playerGiveBomb', function () {
         this.socket.emit('bombCollected');
       }, null, self);
-      
+
     }, null, self);
   });
 
@@ -190,9 +190,9 @@ function create() {
     }, null, self);
   })
 
-  this.socket.on('consolePlayer', function(players) {
-    console.log(players);
-  })
+  // this.socket.on('consolePlayer', function(players) {
+  //   console.log(players);
+  // })
 
 
 
