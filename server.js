@@ -45,6 +45,9 @@ io.on('connection', function (socket) {
   // send the players object to the new player
   socket.emit('currentPlayers', players);
 
+  // send to remove players
+  socket.emit('removePlayer', players);
+
   // send the bomb object to the new player
   socket.emit('bombLocation', bomb);
 
@@ -129,17 +132,22 @@ io.on('connection', function (socket) {
 
     // om spelaren håller i bomben och den explodera 
     if (players[socket.id].holdBomb === true && bombExplode === true) {
-      life = false
+      players[socket.id].life = false
       players[socket.id].holdBomb = false
+      if(players[socket.id].life === false){
+        socket.broadcast.emit('removePlayer', socket.id);
+        //delete players[socket.id]
+      }
+        
     }
     setTimeout(bombExplode, bombTimer);
-    io.emit('consolePlayer', players)
+    //io.emit('consolePlayer', players)
     io.emit('bombLocation', bomb);
   });
 
   socket.on('playersCollided', function () {
     if (players[socket.id].holdBomb === true && players[socket.id].x === bomb.x && players[socket.id].y === bomb.y) {
-      players[socket.id].holdBomb === false
+      players[socket.id].holdBomb = false
       io.emit('playerGiveBomb', players)
     }
   });
