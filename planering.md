@@ -162,12 +162,16 @@ Det finns walls som ska få en colliders så man inte kan göra igenom dem.
 # veka 21
 ## Tisdag
 ### Vad gjordes sist
+Fixa så att sno bomben funkar samt att spelaren kan försvinna men behöver utvecklas. Fixa de collationen med wall
 
 ### Vad ska göras 
+Fixa hosting, om spelaren sprängs och bugar.
 
 ### Vad gick fel
+Jag vet inte hur man ska göra för att få bort spelaren som förlorade/exploderade från spelet.
 
 ### Har gjort 
+Gjorde sp hostingen funkar, kunde inte fixa så spelaren förvinner ur spelet när dem sprängs. Dem kommer connectar bara igen. Gjorde sno funktionen bättre.  
 
 ## Fredag
 ### Vad gjordes sist
