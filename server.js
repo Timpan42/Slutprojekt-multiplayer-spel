@@ -28,12 +28,14 @@ io.on('connection', function (socket) {
   var holdingBomb = false
   const colors = ['blue', 'green', 'pink', 'red', 'white'];
   var life = true
+  var playerX = [100, 500, 700];
+  var playerY = [100, 300, 500];
 
   // create a new player and add it to our players object
   players[socket.id] = {
     rotation: 0,
-    x: Math.floor(Math.random() * 700) + 50,
-    y: Math.floor(Math.random() * 500) + 50,
+    x: playerX[Math.floor(Math.random() * playerX.length)],
+    y: playerY[Math.floor(Math.random() * playerY.length)],
     playerId: socket.id,
     team: colors[Math.floor(Math.random() * colors.length)],
     holdBomb: holdingBomb,
@@ -45,12 +47,16 @@ io.on('connection', function (socket) {
   // send the bomb object to the new player
   socket.emit('bombLocation', bomb);
 
+  // information about the player
   socket.emit('consolePlayer', players);
-
 
   // send the bomb to other players
   socket.emit('playerOverlap', players);
+  
+  // to send the bomb to the player 
+  socket.emit('playerGiveBomb', players);
 
+  // send if players collides with wall
   socket.emit('playerCollideWall', players)
 
   // send the current scores
@@ -131,8 +137,9 @@ io.on('connection', function (socket) {
   });
 
   socket.on('playersCollided', function () {
-    if (players[socket.id].holdBomb === true) {
+     if (players[socket.id].holdBomb === true && players[socket.id].x === bomb.x && players[socket.id].y === bomb.y) {
       players[socket.id].holdBomb === false
+      io.emit('playerGiveBomb', players)
     }
   });
 

@@ -138,7 +138,11 @@ function create() {
   this.socket.on('playerOverlap', function (playerOverlap) {
     self.physics.add.overlap(self.ship, self.otherPlayers, function () {
       this.socket.emit('playersCollided');
-      this.socket.emit('bombCollected');
+
+      this.socket.on('playerGiveBomb', function () {
+        this.socket.emit('bombCollected');
+      }, null, self);
+      
     }, null, self);
   });
 
@@ -187,7 +191,7 @@ function create() {
   })
 
   this.socket.on('consolePlayer', function(players) {
-    console.log(players)
+    console.log(players);
   })
 
 
