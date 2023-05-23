@@ -8,6 +8,7 @@ var pointsPerSec = 0.1
 
 var players = {};
 
+
 var bombTimer = 30 * 1000;
 var playerExplode = false
 var bomb = {
@@ -52,7 +53,7 @@ io.on('connection', function (socket) {
 
   // send the bomb to other players
   socket.emit('playerOverlap', players);
-  
+
   // to send the bomb to the player 
   socket.emit('playerGiveBomb', players);
 
@@ -137,7 +138,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('playersCollided', function () {
-     if (players[socket.id].holdBomb === true && players[socket.id].x === bomb.x && players[socket.id].y === bomb.y) {
+    if (players[socket.id].holdBomb === true && players[socket.id].x === bomb.x && players[socket.id].y === bomb.y) {
       players[socket.id].holdBomb === false
       io.emit('playerGiveBomb', players)
     }
