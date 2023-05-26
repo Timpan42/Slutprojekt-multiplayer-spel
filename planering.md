@@ -175,9 +175,12 @@ Gjorde sp hostingen funkar, kunde inte fixa så spelaren förvinner ur spelet n�
 
 ## Fredag
 ### Vad gjordes sist
+Hostade på glitch som funkar och gjorde att sno funktionen funkar lite bättre. Försökte fixa så spelaren försvinner efter att bomben exploderade medans spelaren håller den. 
 
 ### Vad ska göras 
+Ska fixa försvinn dellen så spelaren inte kan fortsätta köra. Försöka fixa mer bugar (att man inte kan ta upp bomben efter den har spana in igen). Kan lägga till lite CSS.
 
 ### Vad gick fel
+
 
 ### Har gjort 
