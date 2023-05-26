@@ -1,0 +1,13 @@
+body{
+    background-color: #252525;
+}
+
+.class{
+    color: #E9E9E9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 20%;
+}
