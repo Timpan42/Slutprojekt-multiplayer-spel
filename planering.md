@@ -181,6 +181,7 @@ Hostade på glitch som funkar och gjorde att sno funktionen funkar lite bättre.
 Ska fixa försvinn dellen så spelaren inte kan fortsätta köra. Försöka fixa mer bugar (att man inte kan ta upp bomben efter den har spana in igen). Kan lägga till lite CSS.
 
 ### Vad gick fel
-
+Jag försökte fixa så att spelaren blir stoppad när dem har bomben och den sprängs. Men det funkade inte samt har jag problem att emita spesefika saker till game scenen som gör att fel saker händer eller saker som inte borde hända. För stå inte varför jag har denna problem 
 
 ### Har gjort 
+Försökt jobba med att ta bort/stoppa spelaren, men fick inte det att funka. 
