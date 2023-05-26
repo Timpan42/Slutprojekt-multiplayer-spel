@@ -1,5 +1,6 @@
 const road = 'road'
 const road_ro = 'road_rotation'
+var gameOver = false;
 
 
 var config = {
@@ -89,21 +90,21 @@ function create() {
   self.background.setScale(1, 0.75)
 
   // wall 
-    // vänster up/ner
-  self.road1 = this.physics.add.image(152,13, road).setScale(0.8,1).setVisible(false);
-  self.road2 = this.physics.add.image(152,587, road).setScale(0.8,1).setVisible(false);
-    // höger up/ner
-  self.road3 = this.physics.add.image(672,13, road).setScale(0.8,1).setVisible(false);
-  self.road4 = this.physics.add.image(672,587, road).setScale(0.8,1).setVisible(false);
-    // sidor höger/vänster
-  self.road5 = this.physics.add.image(18,300, road_ro).setScale(1.2,1.4).setVisible(false);
-  self.road6 = this.physics.add.image(782,300, road_ro).setScale(1.2,1.4).setVisible(false);
-    // mitten up vänster/höger
-  self.road7 = this.physics.add.image(262.7,189.1, road_ro).setScale(1.40,0.39).setVisible(false);
-  self.road8 = this.physics.add.image(562.7,189.1, road_ro).setScale(1.40,0.39).setVisible(false);
-    // mitten ner vänster/höger
-  self.road9 = this.physics.add.image(262.7,410.4, road_ro).setScale(1.40,0.39).setVisible(false);
-  self.road10 = this.physics.add.image(562.7,410.4, road_ro).setScale(1.40,0.39).setVisible(false);
+  // vänster up/ner
+  self.road1 = this.physics.add.image(152, 13, road).setScale(0.8, 1).setVisible(false);
+  self.road2 = this.physics.add.image(152, 587, road).setScale(0.8, 1).setVisible(false);
+  // höger up/ner
+  self.road3 = this.physics.add.image(672, 13, road).setScale(0.8, 1).setVisible(false);
+  self.road4 = this.physics.add.image(672, 587, road).setScale(0.8, 1).setVisible(false);
+  // sidor höger/vänster
+  self.road5 = this.physics.add.image(18, 300, road_ro).setScale(1.2, 1.4).setVisible(false);
+  self.road6 = this.physics.add.image(782, 300, road_ro).setScale(1.2, 1.4).setVisible(false);
+  // mitten up vänster/höger
+  self.road7 = this.physics.add.image(262.7, 189.1, road_ro).setScale(1.40, 0.39).setVisible(false);
+  self.road8 = this.physics.add.image(562.7, 189.1, road_ro).setScale(1.40, 0.39).setVisible(false);
+  // mitten ner vänster/höger
+  self.road9 = this.physics.add.image(262.7, 410.4, road_ro).setScale(1.40, 0.39).setVisible(false);
+  self.road10 = this.physics.add.image(562.7, 410.4, road_ro).setScale(1.40, 0.39).setVisible(false);
 
   // text 
   blueScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
@@ -111,6 +112,7 @@ function create() {
   pinkScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
   redScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
   whiteScoreText = this.add.text(16, 16, '', { fontSize: '50px', fill: '#000000', fontStyle: 'bold' }).setVisible(false);
+  overText = this.add.text(250, 300, 'You Dead', { fontSize: '64px'}).setVisible(false);
 
   // score update 
   this.socket.on('scoreUpdate', function (scores) {
@@ -183,12 +185,18 @@ function create() {
     }, null, self);
 
     self.physics.add.overlap(self.ship, self.road9, function (ship, road) {
-      ship.setVelocity(0);  
+      ship.setVelocity(0);
     }, null, self);
     self.physics.add.overlap(self.ship, self.road10, function (ship, road) {
       ship.setVelocity(0);
     }, null, self);
   })
+
+  this.gameOver = false;
+  this.socket.on('stopPlayer', function () {
+    this.gameOver = true;
+    console.log(this.gameOver);
+  });
 
   // this.socket.on('consolePlayer', function(players) {
   //   console.log(players);
@@ -200,6 +208,11 @@ function create() {
 }
 
 function update() {
+  if(this.gameOver == true){
+    console.log("jagagagag")
+    return
+  }
+
 
   if (this.ship) {
     var x = this.ship.x;
@@ -272,6 +285,10 @@ function addOtherPlayers(self, playerInfo) {
   console.log(playerInfo)
   otherPlayers.playerId = playerInfo.playerId;
   self.otherPlayers.add(otherPlayers);
+}
+
+function setVisibleGame(t){
+  this.overText.setVisible(t);
 }
 
 function visibleText(playerInfo) {

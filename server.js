@@ -9,7 +9,7 @@ var pointsPerSec = 0.1
 var players = {};
 
 
-var bombTimer = 30 * 1000;
+var bombTimer = 3 * 1000;
 var playerExplode = false
 var bomb = {
   x: 400,
@@ -65,6 +65,8 @@ io.on('connection', function (socket) {
 
   // send the current scores
   socket.emit('scoreUpdate', scores);
+
+  socket.broadcast.emit('stopPlayer', players)
 
   // update all other players of the new player
   socket.broadcast.emit('newPlayer', players[socket.id]);
@@ -132,10 +134,10 @@ io.on('connection', function (socket) {
 
     // om spelaren håller i bomben och den explodera 
     if (players[socket.id].holdBomb === true && bombExplode === true) {
-      players[socket.id].life = false
+      players[socket.id].playerLife = false
       players[socket.id].holdBomb = false
-      if(players[socket.id].life === false){
-        socket.broadcast.emit('removePlayer', socket.id);
+      if(players[socket.id].playerLife === false){
+        io.emit('stopPlayer', players[socket.id]);
         //delete players[socket.id]
       }
         
