@@ -185,3 +185,27 @@ Jag försökte fixa så att spelaren blir stoppad när dem har bomben och den sp
 
 ### Har gjort 
 Försökt jobba med att ta bort/stoppa spelaren, men fick inte det att funka. 
+
+
+# veka 22
+## Tisdag
+### Vad gjordes sist
+Jag försökte fixa så spelaren kan nå ett game over tillfälle, som inte funkade. Det vart mer bugs än jag startade med 
+
+### Vad ska göras 
+Skriva PM och sen försöka fixa bugs.
+
+### Vad gick fel
+
+
+### Har gjort 
+
+## Fredag
+### Vad gjordes sist
+
+### Vad ska göras 
+
+### Vad gick fel
+
+### Har gjort 
+
