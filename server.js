@@ -9,7 +9,7 @@ var pointsPerSec = 0.1
 var players = {};
 
 
-var bombTimer = 3 * 1000;
+var bombTimer = 30 * 1000;
 var playerExplode = false
 var bomb = {
   x: 400,

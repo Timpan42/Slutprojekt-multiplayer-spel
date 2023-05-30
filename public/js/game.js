@@ -30,7 +30,7 @@ function preload() {
   this.load.image(road_ro, 'assets/road_rotation.png')
   this.load.image('ship', 'assets/BlueStrip.png');
   this.load.image('otherPlayer', 'assets/GreenStrip.png');
-  this.load.image('bomb', 'assets/star_gold.png');
+  this.load.image('bomb', 'assets/bomb.png');
 
   // end of preload   
 }
@@ -129,7 +129,7 @@ function create() {
     if (self.bomb) {
       self.bomb.destroy();
     }
-    self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb');
+    self.bomb = self.physics.add.image(bombLocation.x, bombLocation.y, 'bomb').setScale(1.5);
     self.physics.add.overlap(self.ship, self.bomb, function () {
       this.socket.emit('bombCollected');
       self.bomb.destroy();
